@@ -1,0 +1,168 @@
+/* General styles */
+.siteNav {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 9;
+  width: 100%;
+  background-color: #131618;
+}
+
+.logo {
+  display: flex;
+  height: 106px;
+  width: 160px;
+  margin-top: -25%;
+  margin-bottom: -25%;
+  object-fit: cover;
+}
+
+.site-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+/* Drawer styles */
+.burger {
+  cursor: pointer;
+  font-size: 34px;
+  color: #cc9900;
+  display: none; /* Hide burger on larger screens */
+  margin-right: 15px;
+}
+
+.drawer {
+  position: fixed;
+  top: 84px;
+  right: 0;
+  height: 100%;
+  width: 60%;
+  max-width: 300px;
+  background-color: rgba(0, 0, 0, 0.9);
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 10;
+  display: none; /* Hide drawer on larger screens */
+}
+
+.drawer.open {
+  transform: translateX(0);
+}
+
+.drawerMenu {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0px;
+}
+
+.drawerMenuItem {
+  border-bottom: 1px solid #333;
+}
+
+.drawerMenuLink {
+  display: block;
+  padding: 15px 20px;
+  text-decoration: none;
+  color: #cc9900;
+  font-size: 18px;
+}
+
+.drawerMenuLink:hover {
+  color: #fff;
+}
+
+/* Dropdown Menu for Tools */
+.dropdownMenu {
+  display: none;
+  position: absolute;
+  top: 100%; /* Position dropdown right below the Tools link */
+  left: 0;
+  background-color: #131618;
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0; /* Remove the margin to prevent navbar height increase */
+  z-index: 11;
+}
+
+.dropdownMenu.open {
+  display: block;
+}
+
+.dropdownItem {
+  padding: 10px 20px;
+  display: block;
+  text-decoration: none;
+  color: #cc9900;
+}
+
+.dropdownItem:hover {
+  color: #fff;
+}
+
+/* Site Menu styles for larger screens */
+.siteMenu {
+  margin-bottom: 0;
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.siteMenu > li {
+  display: inline-block;
+  position: relative;
+}
+
+.siteMenu > li:last-child {
+  margin-right: 15px;
+}
+
+.siteMenu > li > a,
+.siteMenu > li > span {
+  font-size: 14px;
+  padding: 10px 15px;
+  display: inline-block;
+  text-decoration: none !important;
+  color: #cc9900;
+  cursor: pointer;
+}
+
+.siteMenu > li > a:hover,
+.siteMenu > li > span:hover {
+  color: #fff;
+}
+
+.siteMenu > li.active > a {
+  color: #fff;
+}
+
+/* Responsive styles for small screens */
+@media (max-width: 992px) {
+  .burger {
+    display: block; /* Show burger on small screens */
+  }
+
+  .siteMenu {
+    display: none; /* Hide original menu on small screens */
+  }
+
+  .drawer {
+    display: block; /* Show drawer on small screens */
+  }
+
+  .drawerMenu .dropdownMenu {
+    display: none;
+    position: absolute;
+    top: 100%; /* Position dropdown right below the Tools link */
+    left: 0;
+    background-color: #131618;
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0; /* Remove the margin to prevent navbar height increase */
+    z-index: 11;
+  }
+}

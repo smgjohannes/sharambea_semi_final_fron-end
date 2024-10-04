@@ -1,0 +1,153 @@
+.search-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.search-form-container {
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+
+.search-form input,
+.search-form select,
+.search-form button {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+  height: fit-content !important;
+}
+.search-form input {
+  width: 40% !important;
+}
+.search-form button {
+  background-color: #cc9900;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+}
+
+.search-form button:hover {
+  background-color: #b58600;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown__value {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.dropdown__options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1;
+  display: none;
+}
+
+.dropdown__option {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown:hover .dropdown__options {
+  display: block;
+}
+
+.dropdown__option:hover {
+  background-color: #f0f0f0;
+}
+
+.switcher {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.switcher__control {
+  width: 40px;
+  height: 20px;
+  background-color: #ccc;
+  border-radius: 20px;
+  position: relative;
+  cursor: pointer;
+}
+
+.switcher__control::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.switcher__control.active::before {
+  transform: translateX(20px);
+  background-color: #4caf50;
+}
+
+.switcher__label {
+  font-size: 1rem;
+}
+
+.show-more {
+  background-color: #ccc;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.show-more:hover {
+  background-color: #bbb;
+}
+
+.dropdown__value-text,
+.dropdown__option,
+.switcher__label {
+  color: black;
+}
+
+.more-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (max-width: 992px) {
+  .search-form {
+    flex-direction: column;
+    margin: 0 15px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .search-form {
+    flex-direction: column;
+    margin: 0 15px;
+  }
+}

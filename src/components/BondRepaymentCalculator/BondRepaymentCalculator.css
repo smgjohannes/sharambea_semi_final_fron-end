@@ -1,0 +1,78 @@
+.calculator-container-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(../../assets/images/hero_bg_2.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: cover;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+  height: 300px;
+}
+
+.calculator-container-title-overlay {
+  background-color: gray;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.5; /* Adjust the opacity as needed */
+  z-index: 2;
+}
+
+.calculator-container-title h2 {
+  color: white;
+  text-align: center;
+  font-size: 40px;
+  font-weight: 800;
+  position: relative;
+  z-index: 3;
+}
+
+.calculator {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
+  margin-bottom: 50px;
+}
+
+.calculator h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.calculator-input,
+.calculator-output {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.calculator-input label,
+.calculator-output .output-item label {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.calculator-input input {
+  flex: 2;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.calculator-output .output-item {
+  flex: 1;
+  text-align: center;
+  background: #eee;
+  padding: 10px;
+  border-radius: 4px;
+}

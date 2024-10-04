@@ -1,0 +1,60 @@
+.market-estimate {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+.market-estimate h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.form-group input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type='text'],
+input[type='email'],
+textarea {
+  width: 97%;
+  padding: 8px;
+
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  padding: 10px;
+  background: green;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: darkgreen;
+}
+
+p {
+  text-align: center;
+}
+
+#robot {
+  margin-right: 10px;
+}

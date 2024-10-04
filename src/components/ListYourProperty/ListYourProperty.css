@@ -1,0 +1,101 @@
+.list-your-property-container-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(../../assets/images/hero_bg_2.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: cover;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+  height: 300px;
+}
+
+.list-your-property-container-title-overlay {
+  background-color: gray;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.5; /* Adjust the opacity as needed */
+  z-index: 2;
+}
+
+.list-your-property-container-title h2 {
+  color: white;
+  text-align: center;
+  font-size: 40px;
+  font-weight: 800;
+  position: relative;
+  z-index: 3;
+}
+
+.list-your-property {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
+  margin-bottom: 40px;
+}
+
+.list-your-property h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  column-gap: 20px;
+}
+
+.form-group input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type='text'],
+input[type='email'],
+textarea,
+#category_type,
+#property_type {
+  width: 96%;
+  padding: 8px;
+
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background: green;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: darkgreen;
+}
+
+p {
+  text-align: center;
+}
+
+#robot {
+  margin-right: 10px;
+}

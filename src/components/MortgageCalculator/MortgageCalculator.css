@@ -1,0 +1,63 @@
+.mortgage-calculator {
+  padding: 20px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.mortgage-calculator h3 {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.form-group {
+  display: flex;
+  justify-content: left;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-with-icon {
+  display: flex;
+  align-items: center;
+}
+
+.input-with-icon input {
+  flex: 1;
+  padding: 5px;
+}
+
+.input-with-icon button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.input-with-icon button:hover {
+  background-color: #0056b3;
+}
+
+.monthly-payment {
+  margin-top: 15px;
+  font-size: 1rem;
+  color: #333;
+}
+.calculate-button {
+  background-color: #cc9900;
+}
+@media (max-width: 768px) {
+  .form-group {
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    margin-bottom: 10px;
+    gap: 10px;
+  }
+}

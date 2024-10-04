@@ -1,0 +1,77 @@
+/* src/styles/Agents.css */
+.agents-section {
+  text-align: center;
+  padding: 0px 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  margin-bottom: 20px;
+}
+
+.agents-section h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.agents-section p {
+  margin-bottom: 40px;
+  color: #666;
+}
+
+.agents-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.agent-card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  width: 250px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+.team-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 10px;
+  margin-bottom: 40px;
+}
+.agent-card img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.agent-card h3 {
+  margin: 10px 0;
+  font-size: 1.2em;
+}
+
+.agent-card p {
+  color: #666;
+  font-size: 0.9em;
+}
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.social-icons i {
+  color: #f0a500;
+}
+@media (max-width: 992px) {
+  .agents-section {
+    padding: 25px 10px;
+  }
+  .agents-section p {
+    width: 100%;
+  }
+  .agent-card {
+    width: 100%;
+  }
+}
