@@ -2,6 +2,7 @@
 
 import React from 'react';
 import './Footer.css';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -18,26 +19,35 @@ const Footer = () => {
           </p>
           <p>
             <a href='mailto:Sharambearproperties@gmail.com'>
-              Sharambearproperties@gmail.com
+              chelsea@sharambearprop.com
             </a>
           </p>
         </div>
         <div className='footer-section'>
           <h4>Sources</h4>
           <p>
-            <a href='/about'>About us</a>
+            <Link to='/about' className='siteMenuLink'>
+              <a>About us</a>
+            </Link>
           </p>
           <p>
-            <a href='/services'>Services</a>
+            <Link to='/services' className='siteMenuLink'>
+              {' '}
+              <a>Services</a>
+            </Link>
           </p>
         </div>
         <div className='footer-section'>
           <h4>Links</h4>
           <p>
-            <a href='/about'>About us</a>
+            <Link to='/properties' className='siteMenuLink'>
+              <a>Properties</a>
+            </Link>
           </p>
           <p>
-            <a href='/contact'>Contact us</a>
+            <Link to='/contact ' className='siteMenuLink'>
+              <a>Contact us</a>
+            </Link>
           </p>
         </div>
       </div>
@@ -46,7 +56,7 @@ const Footer = () => {
         <div className='footer-section copyright'>
           <p>
             Copyright © 2024. All Rights Reserved. — Powered by{' '}
-            <a href='https://example.com'>MbutoSowa</a>
+            <a href='http://mbuto-elearn.com/'>MbutoSowa</a>
           </p>
         </div>
       </div>

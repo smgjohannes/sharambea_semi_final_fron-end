@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+
 import './ListYourProperty.css';
+import { HttpClient } from '../../utils/HttpClient';
 
 function ListYourProperty() {
   const [formData, setFormData] = useState({
@@ -40,7 +41,7 @@ function ListYourProperty() {
       setPropertyType(value); // Update property type state
     }
   };
-
+  const httpClient = new HttpClient();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -58,15 +59,11 @@ function ListYourProperty() {
     });
 
     try {
-      const response = await axios.post(
-        'http://127.0.0.1:4343/api/v1/requests',
-        data,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        }
-      );
+      const response = await httpClient.post('/requests', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
       if (response.status === 201) {
         setFormData({

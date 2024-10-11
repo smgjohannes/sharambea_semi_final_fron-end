@@ -1,8 +1,5 @@
-// src/components/CategorySection.js
 import React from 'react';
-import '../styles/CategorySection.css'; // Ensure this path matches your project structure
-import { FaStore } from 'react-icons/fa';
-import { GiHouse, GiHomeGarage } from 'react-icons/gi';
+import '../styles/CategorySection.css';
 import { FaHome, FaBuilding, FaChartLine, FaBullhorn } from 'react-icons/fa';
 
 const CategorySection = () => {

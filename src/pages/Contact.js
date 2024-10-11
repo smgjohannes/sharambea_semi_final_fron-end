@@ -10,6 +10,7 @@ import {
   faHouse,
 } from '@fortawesome/free-solid-svg-icons';
 import { Alert } from '../components/Alert';
+import { HttpClient } from '../utils/HttpClient';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -29,25 +30,21 @@ const Contact = () => {
   };
 
   const handleSubmit = async (e) => {
+    const httpClient = new HttpClient();
     e.preventDefault();
     try {
-      const response = await fetch('http://127.0.0.1:4343/api/v1/email/send', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+      const response = await httpClient.post(
+        '/email/send',
+        JSON.stringify(formData)
+      );
+      setSuccessMessage('Message sent successfully!');
+      setFormData({
+        ...formData,
+        from_name: '',
+        from_email: '',
+        subject: '',
+        message: '',
       });
-      if (response.ok) {
-        setSuccessMessage('Message sent successfully!');
-        setFormData({
-          ...formData,
-          from_name: '',
-          from_email: '',
-          subject: '',
-          message: '',
-        });
-      } else {
-        setErrorMessage('Failed to send message.');
-      }
     } catch (error) {
       setErrorMessage('An error occurred. Please try again.');
     }
@@ -66,20 +63,22 @@ const Contact = () => {
       </div>
       <div className='contact-container'>
         <div className='contact-left'>
-          <h1>We Provide The Most Suitable And Quality Real Estate.</h1>
+          <h1>
+            We Provide The Most Suitable And Quality Real Estate Services.
+          </h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sed
-            tristique metus proin id lorem odio.
+            Contact us for the best deals on properties. Whether you're buying,
+            selling, or renting, we're here to assist you with your real estate
+            needs.
           </p>
           <div className='contact-info'>
             <div className='contact-info-item'>
               <i>
-                {' '}
                 <FontAwesomeIcon icon={faHouse} />
               </i>
               <div>
-                <p>Office address</p>
-                <p>2715 Ash Dr. San Jose, South Dakota 83475</p>
+                <p>Postal address</p>
+                <p>P.O Box 21889, Windhoek</p>
               </div>
             </div>
             <div className='contact-info-item'>
@@ -87,18 +86,17 @@ const Contact = () => {
                 <FontAwesomeIcon icon={faPhone} />
               </i>
               <div>
-                <p>Office phone</p>
-                <p>314-555-0123</p>
+                <p>phone</p>
+                <p>+264 85 3833201</p>
               </div>
             </div>
             <div className='contact-info-item'>
               <i>
-                {' '}
                 <FontAwesomeIcon icon={faEnvelope} />
               </i>
               <div>
                 <p>Email us</p>
-                <p>Sharambeaproperties@gmail.com</p>
+                <p>chelsea@sharambeaprop.com</p>
               </div>
             </div>
           </div>

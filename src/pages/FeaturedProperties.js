@@ -5,7 +5,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import '../styles/FeaturedProperties.css';
 import { FaBed, FaBath } from 'react-icons/fa';
 import { BiArea } from 'react-icons/bi';
-import axios from 'axios';
+import { HttpClient } from '../utils/HttpClient';
 
 const FeaturedProperties = ({ searchCriteria }) => {
   const [centerSlidePercentage, setCenterSlidePercentage] = useState(33.33);
@@ -13,12 +13,10 @@ const FeaturedProperties = ({ searchCriteria }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
+    const httpClient = new HttpClient();
     const fetchProperties = async () => {
       try {
-        const response = await axios.get(
-          `http://127.0.0.1:4343/api/v1/properties/all`
-        );
-
+        const response = await httpClient.get(`/properties/all`);
         const limitedProperties = response.data.slice(0, 5);
         setProperties(limitedProperties);
       } catch (error) {

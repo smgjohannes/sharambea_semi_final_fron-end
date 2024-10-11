@@ -13,10 +13,12 @@ import ListYourProperty from './components/ListYourProperty/ListYourProperty';
 import MarketEstimate from './components/MarketEstimate/MarketEstimate';
 import PropertyDetails from './pages/PropertyDetails';
 import Footer from './components/Footer/Footer';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <NavBar />
       <Routes>
         <Route path='/' element={<Home />} />

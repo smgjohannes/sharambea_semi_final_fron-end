@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import axios from 'axios';
+
 import Pagination from '../components/Pagination/Pagination';
 import '../styles/Properties.css';
 import { FaBed, FaBath } from 'react-icons/fa';
 import { BiArea } from 'react-icons/bi';
 
 import Meta from '../components/Meta';
+import { HttpClient } from '../utils/HttpClient';
 
 const Properties = () => {
   const navigation = useLocation();
@@ -26,14 +27,13 @@ const Properties = () => {
 
     const { propertyType, type, location } = getQueryParams();
 
+    const httpClient = new HttpClient();
+
     const fetchProperties = async () => {
       try {
-        const response = await axios.get(
-          'http://127.0.0.1:4343/api/v1/properties/all',
-          {
-            params: { propertyType, type, location },
-          }
-        );
+        const response = await httpClient.get('/properties/all', {
+          params: { propertyType, type, location },
+        });
         setProperties(response.data);
       } catch (error) {
         console.error('Error fetching properties:', error);
@@ -100,7 +100,7 @@ const Properties = () => {
                     <FaBath /> {property.bathrooms}
                   </span>
                   <span className='property-page-detail'>
-                    <BiArea /> {property.area_measurement} sq. ft
+                    <BiArea /> {property.land_size} sq. ft
                   </span>
                 </div>
               </div>

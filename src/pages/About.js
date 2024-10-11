@@ -1,27 +1,16 @@
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../styles/About.css'; // Ensure you have a CSS file for styling
-import {
-  faFacebook,
-  faTwitter,
-  faInstagram,
-  faTiktok,
-} from '@fortawesome/free-brands-svg-icons';
-import {
-  FaEye,
-  FaBuilding,
-  FaChevronRight,
-  FaChevronLeft,
-  FaPhone,
-} from 'react-icons/fa';
+
+import { FaPhone } from 'react-icons/fa';
 import { TfiEmail } from 'react-icons/tfi';
 import chelseaImg from '../assets/images/copyid.png';
 import nangyImg from '../assets/images/copyche.png';
+import team from '../assets/images/agents/sharambea_team.jpg';
 import chelseaImg1 from '../assets/images/sharambea.jpeg';
-import chelseaImg2 from '../assets/images/chelsea.jpeg';
-import chelseaImg3 from '../assets/images/nangy.jpg';
+import chelsea from '../assets/images/agents/chelsea.jpg';
+import nangy from '../assets/images/agents/nangy.jpeg';
 
 const About = () => {
   return (
@@ -52,7 +41,7 @@ const About = () => {
               <button className='contact-button'>Get in touch with us</button>
             </div>
             <div className='story-video'>
-              <img src={chelseaImg1} alt='Our Story' />
+              <img src={team} alt='Our Story' />
               <button className='play-button'>Your Trusted Agents</button>
             </div>
           </div>
@@ -109,7 +98,7 @@ const About = () => {
           <div className='about-team-container'>
             <div className='about-team-card'>
               <div className='about-team-card-image'>
-                <img src={chelseaImg2} alt='Agent 1' />
+                <img src={chelsea} alt='Agent 1' />
               </div>
               <div className='about-team-card-text'>
                 <h4>Chelsea</h4>
@@ -128,11 +117,19 @@ const About = () => {
                 </p>
 
                 <hr />
-                <p>
-                  <FaPhone /> +264 853833201
+                <p className='agent-contact-icon'>
+                  <FaPhone
+                    style={{ color: '#f0a500', fontSize: '35 ' }}
+                    className='w3-margin-right'
+                  />
+                  +264 85 3833201
                 </p>
-                <p>
-                  <TfiEmail /> chelsea@sharambeaproperties.com
+                <p className='agent-contact-icon'>
+                  <TfiEmail
+                    style={{ color: '#f0a500', fontSize: '35 ' }}
+                    className='w3-margin-right'
+                  />{' '}
+                  chelsea@sharambeaproperties.com
                 </p>
               </div>
             </div>
@@ -153,21 +150,29 @@ const About = () => {
                 </p>
 
                 <hr />
-                <p>
-                  <FaPhone /> +264 812036652
+                <p className='agent-contact-icon'>
+                  <FaPhone
+                    style={{ color: '#f0a500', fontSize: '35 ' }}
+                    className='w3-margin-right'
+                  />{' '}
+                  +264 81 2036652
                 </p>
-                <p>
-                  <TfiEmail /> nangy@sharambeaproperties.com
-                </p>
+                {/* <p className='agent-contact-icon'>
+                  <TfiEmail
+                    style={{ color: '#f0a500', fontSize: '35 ' }}
+                    className='w3-margin-right'
+                  />{' '}
+                  nangy@sharambeaproperties.com
+                </p> */}
               </div>
               <div className='about-team-card-image'>
-                <img src={chelseaImg3} alt='Agent 2' />
+                <img src={nangy} alt='Agent 2' />
               </div>
             </div>
           </div>
         </section>
 
-        <section className='about-testimonials'>
+        {/* <section className='about-testimonials'>
           <h3>Testimonials</h3>
           <p>
             Publish the best of your client testimonials and let the world know
@@ -224,7 +229,7 @@ const About = () => {
               </div>
             </div>
           </Carousel>
-        </section>
+        </section> */}
       </div>
     </div>
   );

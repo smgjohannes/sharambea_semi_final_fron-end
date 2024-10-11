@@ -1,19 +1,65 @@
 import axios from 'axios';
 import config from '../config';
+import { Token } from './Token';
 
 const MAX_RETRY = 3;
 
+const client = axios.create();
+
+client.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (
+      error.response &&
+      (error.response.status === 429 || error.response.status === 403)
+    ) {
+      console.log('Something went wrong');
+    }
+
+    if (
+      error.response &&
+      error.response.status &&
+      error.response.status !== 412 &&
+      error.response.status !== 422 &&
+      error.response.status > 399 &&
+      error.response.status < 500
+    ) {
+      console.log(error.response.data.message || 'error_title');
+    }
+
+    if (error.response && error.response.status === 500) {
+      console.log('error_title');
+    }
+
+    console.error(error);
+
+    return Promise.reject(error);
+  }
+);
+
 export class HttpClient {
-  constructor(token) {
-    this.token = token;
-    this.baseURL = config.baseUrl;
+  constructor() {
+    this.token = new Token();
+    this.baseUrl = config.baseUrl || window.location.origin;
   }
 
-  getAxiosHeaders() {
+  getAxiosHeaders(url) {
+    const language = localStorage.getItem('X-LOCALE');
     const headers = {};
-    if (this.token.getAccessToken()) {
+
+    // Add authorization only for protected routes
+    const unprotectedRoutes = ['/properties/all']; // List your unprotected routes here
+
+    if (!unprotectedRoutes.includes(url) && this.token.getAccessToken()) {
       headers.authorization = `Bearer ${this.token.getAccessToken()}`;
     }
+
+    if (language) {
+      headers['Accept-Language'] = language;
+    }
+
     return headers;
   }
 
@@ -22,10 +68,9 @@ export class HttpClient {
       this.token.reset();
       throw new Error('MAX_RETRY_EXCEEDED');
     }
-
     try {
       const response = await axios({
-        baseURL: this.baseURL,
+        baseURL: this.baseUrl,
         url,
         method,
         params: query,
@@ -33,8 +78,11 @@ export class HttpClient {
         headers: this.getAxiosHeaders(),
       });
       return response;
-    } catch (err) {
-      throw err; // error must thrown to be catched by createAsyncThunk's rejectWithValue
+    } catch (e) {
+      if (e.response && e.response.status === 401) {
+        return this.executeQuery(method, url, query, body, retryCount + 1);
+      }
+      throw e;
     }
   }
 
@@ -50,11 +98,7 @@ export class HttpClient {
     return this.executeQuery('patch', url, {}, body);
   }
 
-  async put(url, body) {
-    return this.executeQuery('put', url, {}, body);
-  }
-
   async delete(url, body) {
-    return this.executeQuery('delete', url, {}, body);
+    return this.executeQuery('delete', url);
   }
 }

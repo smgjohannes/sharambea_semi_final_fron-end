@@ -14,14 +14,14 @@ const Agents = () => {
             name: 'Chelsea',
             title: 'Principal Agent',
             photo: chelseaImg,
-            description: `Properties: 15`,
+            description: ` +264 85 3833201`,
           },
           {
             id: 'AGENT-2',
             name: 'Nangy',
             title: 'Real Estate Agent ',
             photo: nangyImg,
-            description: 'Properties: 25',
+            description: '+264 81 2036652',
           },
         ].map((r) => (
           <Card
@@ -33,7 +33,6 @@ const Agents = () => {
             secondaryTitle={r.name}
             primaryTitle={r.title}
             description={r.description}
-            buttonText='Learn more'
           />
         ))}
       </>

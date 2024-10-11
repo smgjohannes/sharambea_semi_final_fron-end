@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
 import { FaBed, FaBath, FaCar } from 'react-icons/fa';
 import { BiArea } from 'react-icons/bi';
 import MortgageCalculator from '../components/MortgageCalculator/MortgageCalculator';
 import '../styles/PropertyDetails.css';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import Meta from '../components/Meta';
 import Share from '../components/Share';
 import { Alert } from '../components/Alert';
+import { HttpClient } from '../utils/HttpClient';
 
 const PropertyDetails = () => {
   const { id } = useParams();
@@ -20,7 +19,7 @@ const PropertyDetails = () => {
     name: '',
     email: '',
     phone: '',
-    interested: false,
+    // interested: false,
     viewing_date_time: '',
     message: '',
   });
@@ -32,10 +31,9 @@ const PropertyDetails = () => {
   useEffect(() => {
     const fetchProperty = async () => {
       setLoading(true);
+      const httpClient = new HttpClient();
       try {
-        const response = await axios.get(
-          `http://127.0.0.1:4343/api/v1/properties/${id}`
-        );
+        const response = await httpClient.get(`/properties/${id}`);
         const propertyData = response.data;
         setProperty(propertyData);
         setFormData((prevData) => ({
@@ -56,9 +54,10 @@ const PropertyDetails = () => {
   useEffect(() => {
     if (property) {
       const fetchRelatedProperties = async () => {
+        const httpClient = new HttpClient();
         try {
-          const response = await axios.get(
-            `http://127.0.0.1:4343/api/v1/properties/all?category=${property.category}`
+          const response = await httpClient.get(
+            `/properties/all?category=${property.category}`
           );
           setRelatedProperties(
             response.data.filter((item) => item.id !== property.id)
@@ -108,16 +107,14 @@ const PropertyDetails = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const httpClient = new HttpClient();
     try {
-      await axios.post(
-        `http://127.0.0.1:4343/api/v1/properties/${id}/interestedBuyer`,
-        formData
-      );
+      await httpClient.post(`/properties/${id}/interestedBuyer`, formData);
       setFormData({
         name: '',
         email: '',
         phone: '',
-        interested: false,
+        // interested: false,
         viewing_date_time: '',
         message: '',
       });
@@ -139,8 +136,6 @@ const PropertyDetails = () => {
   if (!property) {
     return <div>Property not found</div>;
   }
-
-  const { latitude, longitude } = property;
 
   const handleCloseAlert = () => {
     setSuccessMessage('');
@@ -203,10 +198,10 @@ const PropertyDetails = () => {
                     <FaBath /> {property.bathrooms}
                   </span>
                   <span className='property-details-row--container'>
-                    <FaCar /> {property.garages}
+                    <FaCar /> {property.parking}
                   </span>
                   <span className='property-details-row--container'>
-                    <BiArea /> {property.land_size}
+                    <BiArea /> {property.land_size} sq. ft
                   </span>
                 </div>
               </div>
@@ -295,7 +290,7 @@ const PropertyDetails = () => {
                     onChange={handleChange}
                     placeholder='message'></textarea>
                 </div>
-                <div className='form-group'>
+                {/* <div className='form-group'>
                   <label htmlFor='interested'>Interested:</label>
                   <input
                     type='checkbox'
@@ -303,7 +298,7 @@ const PropertyDetails = () => {
                     checked={formData.interested}
                     onChange={handleChange}
                   />
-                </div>
+                </div> */}
                 <div className='form-group'>
                   <label htmlFor='viewing_date_time'>
                     Viewing Date & Time:
@@ -323,7 +318,7 @@ const PropertyDetails = () => {
           </div>
         </div>
       </div>
-      <div className='related-section'>
+      {/* <div className='related-section'>
         <h2>Related Properties</h2>
         <div className='related-properties '>
           {relatedProperties.map((relatedProperty) => (
@@ -364,7 +359,7 @@ const PropertyDetails = () => {
             </Link>
           ))}
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
