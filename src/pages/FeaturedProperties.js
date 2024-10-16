@@ -53,46 +53,45 @@ const FeaturedProperties = ({ searchCriteria }) => {
         showIndicators={true}
         className='property-carousel'>
         {properties.map((property) => (
-          <div key={property.id} className='property-card'>
-            <Link
-              to={`/property/${property.id}`}
-              className='featuredProperty-page-card'>
-              <img
-                src={property.Images[currentImageIndex]?.url}
-                alt={property.property_name}
-              />
-              <div className='property-info'>
-                <span
-                  className={`property-type ${
-                    property.featured ? 'featured' : ''
-                  }`}>
-                  {property.type}
-                </span>
-                <span className='property-price'>{property.price}</span>
-                {property.priceDetail && (
-                  <span className='property-price-detail'>
-                    {property.priceDetail}
-                  </span>
-                )}
-                <h3 className='property-name'>{property.name}</h3>
-                <p className='property-address'>
-                  {property.street_name}, {property.house_number},{' '}
-                  {property.town}
-                </p>
-                <div className='property-details'>
-                  <span className='property-detail'>
-                    <FaBed /> {property.bedrooms}
-                  </span>
-                  <span className='property-detail'>
-                    <FaBath /> {property.bathrooms}
-                  </span>
-                  <span className='property-detail'>
-                    <BiArea /> {property.land_size} sq. ft
-                  </span>
-                </div>
-              </div>
-            </Link>
-          </div>
+         <div key={property.id} className='property-card'>
+         <Link to={`/property/${property.id}`} className='featuredProperty-page-card'>
+           <div className='property-image-container'>
+             <img
+               src={property.Images[currentImageIndex]?.url}
+               alt={property.property_name}
+             />
+             {/* Add Category and Posted Date */}
+             <span className='property-category'>{property.property_type}</span>
+             <span className='property-posted'>
+               Posted on: {new Date(property.created_at).toLocaleDateString()}
+             </span>
+           </div>
+           <div className='property-info'>
+ 
+             <h3 className='property-page-name'>{property.category}</h3>
+             <span className='property-price'>N$ {property.price}</span>
+             {property.priceDetail && (
+               <span className='property-price-detail'>{property.priceDetail}</span>
+             )}
+            
+             <p className='property-address'>
+               {property.street_name}, {property.house_number}, {property.town}
+             </p>
+             <div className='property-details'>
+               <span className='property-detail'>
+                 <FaBed /> {property.bedrooms}
+               </span>
+               <span className='property-detail'>
+                 <FaBath /> {property.bathrooms}
+               </span>
+               <span className='property-detail'>
+                 <BiArea /> {property.land_size} sq. ft
+               </span>
+             </div>
+           </div>
+         </Link>
+       </div>
+       
         ))}
       </Carousel>
     </div>

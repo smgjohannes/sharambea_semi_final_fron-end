@@ -67,44 +67,31 @@ const Properties = () => {
         </div>
         <div className='properties-page-list'>
           {currentProperties.map((property) => (
-            <Link
-              key={property.id}
-              to={`/property/${property.id}`}
-              className='property-page-card'>
-              {property.Images && property.Images.length > 0 ? (
-                <img src={property.Images[0].url} alt={property.name} />
-              ) : (
-                <div className='no-image-placeholder'>No Image Available</div>
-              )}
-              <div className='property-page-info'>
-                <span
-                  className={`property-page-type ${
-                    property.featured ? 'featured-page' : ''
-                  }`}>
-                  {property.property_type}
-                </span>
-                <span className='property-page-price'>{property.price}</span>
-                {property.price && (
-                  <span className='property-page-price-detail'>{}</span>
-                )}
-                <h3 className='property-page-name'>{property.property_name}</h3>
-                <p className='property-page-address'>
-                  {property.house_number}, {property.street_name},{' '}
-                  {property.suburb}, {property.town}
-                </p>
-                <div className='property-page-details'>
-                  <span className='property-page-detail'>
-                    <FaBed /> {property.bedrooms}
-                  </span>
-                  <span className='property-page-detail'>
-                    <FaBath /> {property.bathrooms}
-                  </span>
-                  <span className='property-page-detail'>
-                    <BiArea /> {property.land_size} sq. ft
-                  </span>
-                </div>
-              </div>
-            </Link>
+      <Link key={property.id} to={`/property/${property.id}`} className='property-page-card'>
+      {property.Images && property.Images.length > 0 ? (
+        <div className="property-image-container">
+          <img src={property.Images[0].url} alt={property.name} />
+          <span className="property-category">{property.property_type}</span>
+          <span className="property-posted-date">Posted on: {new Date(property.created_at).toLocaleDateString()}</span>
+        </div>
+      ) : (
+        <div className='no-image-placeholder'>No Image Available</div>
+      )}
+      <div className='property-page-info'>
+      <h3 className='property-page-name'>{property.category}</h3>
+        <span className='property-page-price'>N$ {property.price}</span>
+       
+        <p className='property-page-address'>
+          {property.house_number}, {property.street_name}, {property.suburb}, {property.town}
+        </p>
+        <div className='property-page-details'>
+          <span className='property-page-detail'><FaBed /> {property.bedrooms}</span>
+          <span className='property-page-detail'><FaBath /> {property.bathrooms}</span>
+          <span className='property-page-detail'><BiArea /> {property.land_size} sq. ft</span>
+        </div>
+      </div>
+    </Link>
+    
           ))}
         </div>
         <Pagination

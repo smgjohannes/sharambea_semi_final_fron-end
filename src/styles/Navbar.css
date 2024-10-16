@@ -24,14 +24,18 @@
   align-items: center;
   position: relative;
 }
-
+.siteMenuLink.active {
+  color: white;
+  border-bottom: 2px solid white;
+  list-style: none;
+}
 /* Drawer styles */
 .burger {
   cursor: pointer;
   font-size: 34px;
   color: #cc9900;
-  display: none; /* Hide burger on larger screens */
-  margin-right: 15px;
+  display: none; 
+
 }
 
 .drawer {

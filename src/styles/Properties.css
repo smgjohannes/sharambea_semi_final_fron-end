@@ -16,7 +16,40 @@
   flex-wrap: wrap;
   margin: 0 100px;
 }
+.property-image-container {
+  position: relative;
+}
 
+.property-image-container img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  position: relative;
+}
+
+.property-category {
+  position: absolute !important;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.property-posted-date {
+  position: absolute ;
+  bottom: 10px;
+  left: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.8em;
+  font-style: italic;
+}
 .property-page-card {
   border: 1px solid #ddd;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
@@ -24,6 +57,7 @@
   overflow: hidden;
   width: 300px;
   text-decoration: none;
+  position: relative ;
 }
 .property-page-card:hover {
   cursor: pointer;
@@ -67,6 +101,7 @@
 
 .property-page-name {
   margin: 10px 0 5px;
+  text-align: left;
 }
 
 .property-page-address {

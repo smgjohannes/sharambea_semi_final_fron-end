@@ -169,6 +169,7 @@ const PropertyDetails = () => {
                 <button onClick={handlePreviousImage}>Previous</button>
                 <button onClick={handleNextImage}>Next</button>
               </div>
+              
               <div className='thumbnail-images'>
                 {property.Images.map((image, index) => (
                   <img
@@ -179,45 +180,55 @@ const PropertyDetails = () => {
                     onClick={() => handleThumbnailClick(index)}
                   />
                 ))}
+                
               </div>
+              
               <Share />
+              
             </div>
+           
             <div className='property-info'>
-              <div className='property-info-container'>
-                <h2>{property.category}</h2>
-                <p className='property-address'>
-                  Location: {property.street_name}, {property.house_number},{' '}
-                  {property.town}
-                </p>
-                <p className='property-price'>Price: N${property.price}</p>
-                <div className='property-details'>
-                  <span className='property-details-row--container'>
-                    <FaBed /> {property.bedrooms}
-                  </span>
-                  <span className='property-details-row--container'>
-                    <FaBath /> {property.bathrooms}
-                  </span>
-                  <span className='property-details-row--container'>
-                    <FaCar /> {property.parking}
-                  </span>
-                  <span className='property-details-row--container'>
-                    <BiArea /> {property.land_size} sq. ft
-                  </span>
-                </div>
-              </div>
+<div className='property-info-container'>
+  <h2>{property.category}</h2>
+  <p className='property-address'>
+    Location: {property.street_name}, {property.house_number}, {property.town}
+  </p>
+  <p className='property-price'>Price: N$ {property.price}</p>
+  
+  {/* Add Posted Date */}
+  <p className='property-posted-details-page'>Posted on: {new Date(property.created_at).toLocaleDateString()}</p>
+  
+  <div className='property-details'>
+    <span className='property-details-row--container'>
+      <FaBed /> {property.bedrooms}
+    </span>
+    <span className='property-details-row--container'>
+      <FaBath /> {property.bathrooms}
+    </span>
+    <span className='property-details-row--container'>
+      <FaCar /> {property.parking}
+    </span>
+    <span className='property-details-row--container'>
+      <BiArea /> {property.land_size} sq. ft
+    </span>
+  </div>
+</div>
 
               <div className='property-description'>
-                <button
-                  onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}
-                  className='accordion-button'>
-                  {isDescriptionOpen ? 'Hide Description' : 'Show Description'}
-                </button>
-                {isDescriptionOpen && (
-                  <div className='accordion-content'>
-                    <p>{property.description}</p>
-                  </div>
-                )}
-              </div>
+  <button
+    onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}
+    className='accordion-button'>
+    {isDescriptionOpen ? 'Hide Description' : 'Show Description'}
+  </button>
+  {isDescriptionOpen && (
+    <div className='accordion-content'>
+      {property.description.split('\n').map((line, index) => (
+        <p key={index}>{line}</p>
+      ))}
+    </div>
+  )}
+</div>
+
               {/* <div className='property-otherdetails-container'>
                 <h2>Other Details</h2>
                 <div className='property-details-column'>

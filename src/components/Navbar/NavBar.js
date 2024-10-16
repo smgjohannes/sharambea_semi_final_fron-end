@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FiMenu, FiX } from 'react-icons/fi';
 import '../../styles/Navbar.css';
 import logo from '../../assets/images/logo1.png';
@@ -7,6 +7,8 @@ import logo from '../../assets/images/logo1.png';
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const location = useLocation();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -22,6 +24,9 @@ function Navbar() {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  // Helper function to check if a link is active
+  const isActive = (path) => location.pathname === path;
+
   return (
     <nav className='siteNav'>
       <div className='container'>
@@ -32,14 +37,19 @@ function Navbar() {
             </Link>
             <ul className={`siteMenu ${isOpen ? 'open' : ''}`}>
               <li className='siteMenuItem'>
-                <Link to='/' className='siteMenuLink' onClick={closeMenu}>
+                <Link
+                  to='/'
+                  className={`siteMenuLink ${isActive('/') ? 'active' : ''}`}
+                  onClick={closeMenu}>
                   Home
                 </Link>
               </li>
               <li className='siteMenuItem'>
                 <Link
                   to='/properties'
-                  className='siteMenuLink'
+                  className={`siteMenuLink ${
+                    isActive('/properties') ? 'active' : ''
+                  }`}
                   onClick={closeMenu}>
                   Properties
                 </Link>
@@ -47,13 +57,20 @@ function Navbar() {
               <li className='siteMenuItem'>
                 <Link
                   to='/services'
-                  className='siteMenuLink'
+                  className={`siteMenuLink ${
+                    isActive('/services') ? 'active' : ''
+                  }`}
                   onClick={closeMenu}>
                   Services
                 </Link>
               </li>
               <li className='siteMenuItem'>
-                <Link to='/about' className='siteMenuLink' onClick={closeMenu}>
+                <Link
+                  to='/about'
+                  className={`siteMenuLink ${
+                    isActive('/about') ? 'active' : ''
+                  }`}
+                  onClick={closeMenu}>
                   About
                 </Link>
               </li>
@@ -65,7 +82,9 @@ function Navbar() {
                   <li>
                     <Link
                       to='/bond-repayment-calculator'
-                      className='dropdownItem'
+                      className={`dropdownItem ${
+                        isActive('/bond-repayment-calculator') ? 'active' : ''
+                      }`}
                       onClick={closeMenu}>
                       Bond Repayment Calculator
                     </Link>
@@ -73,7 +92,9 @@ function Navbar() {
                   <li>
                     <Link
                       to='/home-loan-services'
-                      className='dropdownItem'
+                      className={`dropdownItem ${
+                        isActive('/home-loan-services') ? 'active' : ''
+                      }`}
                       onClick={closeMenu}>
                       Home Loan Services
                     </Link>
@@ -81,7 +102,9 @@ function Navbar() {
                   <li>
                     <Link
                       to='/affordability-calculator'
-                      className='dropdownItem'
+                      className={`dropdownItem ${
+                        isActive('/affordability-calculator') ? 'active' : ''
+                      }`}
                       onClick={closeMenu}>
                       Affordability Calculator
                     </Link>
@@ -89,7 +112,9 @@ function Navbar() {
                   <li>
                     <Link
                       to='/list-your-property'
-                      className='dropdownItem'
+                      className={`dropdownItem ${
+                        isActive('/list-your-property') ? 'active' : ''
+                      }`}
                       onClick={closeMenu}>
                       List/Request Property
                     </Link>
@@ -97,7 +122,9 @@ function Navbar() {
                   <li>
                     <Link
                       to='/market-estimate'
-                      className='dropdownItem'
+                      className={`dropdownItem ${
+                        isActive('/market-estimate') ? 'active' : ''
+                      }`}
                       onClick={closeMenu}>
                       Market Estimate
                     </Link>
@@ -105,7 +132,9 @@ function Navbar() {
                   <li>
                     <Link
                       to='/property-alerts'
-                      className='dropdownItem'
+                      className={`dropdownItem ${
+                        isActive('/property-alerts') ? 'active' : ''
+                      }`}
                       onClick={closeMenu}>
                       Property Alerts
                     </Link>
@@ -115,14 +144,16 @@ function Navbar() {
               <li className='siteMenuItem'>
                 <Link
                   to='/contact'
-                  className='siteMenuLink'
+                  className={`siteMenuLink ${
+                    isActive('/contact') ? 'active' : ''
+                  }`}
                   onClick={closeMenu}>
                   Contact Us
                 </Link>
               </li>
             </ul>
             <div
-              className='burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none'
+              className='burger light float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none'
               onClick={toggleMenu}>
               {isOpen ? <FiX /> : <FiMenu />}
             </div>
@@ -130,14 +161,19 @@ function Navbar() {
           <div className={`drawer ${isOpen ? 'open' : ''}`}>
             <ul className='drawerMenu'>
               <li className='drawerMenuItem'>
-                <Link to='/' className='drawerMenuLink' onClick={closeMenu}>
+                <Link
+                  to='/'
+                  className={`drawerMenuLink ${isActive('/') ? 'active' : ''}`}
+                  onClick={closeMenu}>
                   Home
                 </Link>
               </li>
               <li className='drawerMenuItem'>
                 <Link
                   to='/properties'
-                  className='drawerMenuLink'
+                  className={`drawerMenuLink ${
+                    isActive('/properties') ? 'active' : ''
+                  }`}
                   onClick={closeMenu}>
                   Properties
                 </Link>
@@ -145,7 +181,9 @@ function Navbar() {
               <li className='drawerMenuItem'>
                 <Link
                   to='/services'
-                  className='drawerMenuLink'
+                  className={`drawerMenuLink ${
+                    isActive('/services') ? 'active' : ''
+                  }`}
                   onClick={closeMenu}>
                   Services
                 </Link>
@@ -153,7 +191,9 @@ function Navbar() {
               <li className='drawerMenuItem'>
                 <Link
                   to='/about'
-                  className='drawerMenuLink'
+                  className={`drawerMenuLink ${
+                    isActive('/about') ? 'active' : ''
+                  }`}
                   onClick={closeMenu}>
                   About
                 </Link>
@@ -162,11 +202,14 @@ function Navbar() {
                 <span className='drawerMenuLink' onClick={toggleDropdown}>
                   Tools
                 </span>
-                <ul className={`dropdownMenu ${isDropdownOpen ? 'open' : ''}`}>
+                <ul
+                  className={`dropdownMenu ${isDropdownOpen ? 'open' : ''}`}>
                   <li>
                     <Link
                       to='/bond-repayment-calculator'
-                      className='dropdownItem'
+                      className={`dropdownItem ${
+                        isActive('/bond-repayment-calculator') ? 'active' : ''
+                      }`}
                       onClick={closeMenu}>
                       Bond Repayment Calculator
                     </Link>
@@ -174,7 +217,9 @@ function Navbar() {
                   <li>
                     <Link
                       to='/home-loan-services'
-                      className='dropdownItem'
+                      className={`dropdownItem ${
+                        isActive('/home-loan-services') ? 'active' : ''
+                      }`}
                       onClick={closeMenu}>
                       Home Loan Services
                     </Link>
@@ -182,7 +227,9 @@ function Navbar() {
                   <li>
                     <Link
                       to='/affordability-calculator'
-                      className='dropdownItem'
+                      className={`dropdownItem ${
+                        isActive('/affordability-calculator') ? 'active' : ''
+                      }`}
                       onClick={closeMenu}>
                       Affordability Calculator
                     </Link>
@@ -190,7 +237,9 @@ function Navbar() {
                   <li>
                     <Link
                       to='/list-your-property'
-                      className='dropdownItem'
+                      className={`dropdownItem ${
+                        isActive('/list-your-property') ? 'active' : ''
+                      }`}
                       onClick={closeMenu}>
                       List/Request Property
                     </Link>
@@ -198,7 +247,9 @@ function Navbar() {
                   <li>
                     <Link
                       to='/market-estimate'
-                      className='dropdownItem'
+                      className={`dropdownItem ${
+                        isActive('/market-estimate') ? 'active' : ''
+                      }`}
                       onClick={closeMenu}>
                       Market Estimate
                     </Link>
@@ -206,7 +257,9 @@ function Navbar() {
                   <li>
                     <Link
                       to='/property-alerts'
-                      className='dropdownItem'
+                      className={`dropdownItem ${
+                        isActive('/property-alerts') ? 'active' : ''
+                      }`}
                       onClick={closeMenu}>
                       Property Alerts
                     </Link>
@@ -216,7 +269,9 @@ function Navbar() {
               <li className='drawerMenuItem'>
                 <Link
                   to='/contact'
-                  className='drawerMenuLink'
+                  className={`drawerMenuLink ${
+                    isActive('/contact') ? 'active' : ''
+                  }`}
                   onClick={closeMenu}>
                   Contact Us
                 </Link>
