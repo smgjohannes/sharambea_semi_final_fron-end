@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { FaCalendarAlt, FaMapMarker } from 'react-icons/fa';
+import styled from "styled-components";
+import { FaCalendarAlt, FaMapMarker } from "react-icons/fa";
 
 export const CardContainer = styled.div`
   position: relative;
@@ -9,10 +9,14 @@ export const CardContainer = styled.div`
   transition: all 0.3s cubic-bezier(0.37, 0.75, 0.61, 1.05) 0s;
   flex: 1 ${(props) => props.flexBasis || 16}%;
   margin: 1rem;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  border: 1px solid #ddd;
 
   @media (max-width: 56.25em) {
     width: 100%;
     margin: 1rem 0.5rem;
+    flex: 1 100%;
   }
 `;
 
@@ -20,7 +24,7 @@ export const CardMedia = styled.a`
   position: relative;
 
   &:before {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
     top: 0;
@@ -43,6 +47,10 @@ export const CardContent = styled.div`
   flex-direction: column;
   padding: 12px 0;
   color: #999999;
+  background-color: #f6f7f9;
+  border: 1px solid #efefef;
+  border-radius: 4px;
+  overflow: hidden;
 
   @media (max-width: 56.25em) {
   }
@@ -60,7 +68,7 @@ export const CardHeading = styled.div`
 `;
 
 export const CardPrimaryTitle = styled.h2`
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
@@ -72,7 +80,7 @@ export const CardPrimaryTitle = styled.h2`
 `;
 
 export const CardSecondaryTitle = styled.h4`
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 500;
   font-size: 20px;
@@ -91,7 +99,7 @@ export const CardMetaText = styled.p`
   color: #2ca58d;
   font-size: 14px;
   display: inline-block;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 300;
   font-size: 16px;
@@ -126,7 +134,7 @@ export const CardLocationIcon = styled(FaMapMarker)`
 `;
 
 export const CardText = styled.div`
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -142,16 +150,16 @@ export const CardCTA = styled.div`
 `;
 
 export const CardButton = styled.a`
-  font-family: 'Roboto';
-  font-style: ${({ fontWeight }) => (fontWeight ? 'bold' : 'normal')};
-  text-transform: ${({ uppercase }) => (uppercase ? 'uppercase' : 'normal')};
+  font-family: "Roboto";
+  font-style: ${({ fontWeight }) => (fontWeight ? "bold" : "normal")};
+  text-transform: ${({ uppercase }) => (uppercase ? "uppercase" : "normal")};
   line-height: 26px;
   background: #2ca58d;
   white-space: nowrap;
-  padding: ${({ big }) => (big ? '14px 48px' : '12px 30px')};
-  color: ${({ dark }) => (dark ? '#010606' : '#fff')};
-  font-weight: ${({ fontWeight }) => (fontWeight ? '700' : '500')};
-  font-size: ${({ fontBig }) => (fontBig ? '24px' : '18px')};
+  padding: ${({ big }) => (big ? "14px 48px" : "12px 30px")};
+  color: ${({ dark }) => (dark ? "#010606" : "#fff")};
+  font-weight: ${({ fontWeight }) => (fontWeight ? "700" : "500")};
+  font-size: ${({ fontBig }) => (fontBig ? "24px" : "18px")};
   border: 2px solid transparent;
   cursor: pointer;
   outline: none;

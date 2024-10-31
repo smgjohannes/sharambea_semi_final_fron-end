@@ -1,49 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-
-import Pagination from '../components/Pagination/Pagination';
-import '../styles/Properties.css';
-import { FaBed, FaBath } from 'react-icons/fa';
-import { BiArea } from 'react-icons/bi';
-
-import Meta from '../components/Meta';
-import { HttpClient } from '../utils/HttpClient';
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import Pagination from "../components/Pagination/Pagination";
+import Meta from "../components/Meta";
+import PropertyCard from "../components/Property/Property";
+import PropertyFilter from "../components/Filters/PropertyFilters";
+import { HttpClient } from "../utils/HttpClient";
+import {
+  PropertiesPage,
+  PropertiesPageList,
+} from "../components/Property/PropertyElements";
+import {
+  HeadingSecondary,
+  PageHeaderOverlay,
+  PageHeaderContainer,
+} from "../components/HeadingElements";
+import { MainContainer } from "../components/Styles";
+import { FlexContainer } from "../components/ContainerElements";
 
 const Properties = () => {
-  const navigation = useLocation();
+  const location = useLocation();
   const [properties, setProperties] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const propertiesPerPage = 6;
+  const [propertyType, setPropertyType] = useState(null);
+  const propertiesPerPage = 4;
 
   useEffect(() => {
-    const getQueryParams = () => {
-      const searchParams = new URLSearchParams(navigation.search);
-      return {
-        propertyType: searchParams.get('propertyType'),
-        type: searchParams.get('type'),
-        location: searchParams.get('location'),
-      };
-    };
-
-    const { propertyType, type, location } = getQueryParams();
-
-    const httpClient = new HttpClient();
+    const queryParams = new URLSearchParams(location.search);
+    setPropertyType(queryParams.get("type"));
 
     const fetchProperties = async () => {
+      const httpClient = new HttpClient();
+      const params = {
+        property_type: queryParams.get("property_type"),
+        category: queryParams.get("category"),
+        location: queryParams.get("location"),
+      };
+
       try {
-        const response = await httpClient.get('/properties/all', {
-          params: { propertyType, type, location },
-        });
-        setProperties(response.data);
+        const response = await httpClient.get("/properties/all", { params });
+        setProperties(response.data.properties); // Access properties array directly
       } catch (error) {
-        console.error('Error fetching properties:', error);
+        console.error("Error fetching properties:", error);
       }
     };
 
     fetchProperties();
-  }, [navigation.search]);
+  }, [location.search]);
 
-  // Calculate the properties to display on the current page
   const indexOfLastProperty = currentPage * propertiesPerPage;
   const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage;
   const currentProperties = properties.slice(
@@ -51,54 +54,99 @@ const Properties = () => {
     indexOfLastProperty
   );
 
-  // Calculate total pages
   const totalPages = Math.ceil(properties.length / propertiesPerPage);
+
+  // Step 1: Extract town and suburb counts
+  const counts = properties.reduce((acc, property) => {
+    const { town, suburb } = property;
+
+    // Check if the town exists in the accumulator
+    if (!acc[town]) {
+      acc[town] = {}; // Initialize the town if it doesn't exist
+    }
+
+    // Check if the suburb exists for the town
+    if (!acc[town][suburb]) {
+      acc[town][suburb] = 0; // Initialize the suburb count
+    }
+
+    // Increment the count for the suburb
+    acc[town][suburb] += 1;
+    return acc;
+  }, {});
+
+  // Convert counts into the desired format
+  const countsArray = Object.entries(counts).map(([town, suburbs]) => ({
+    town,
+    suburbs: Object.entries(suburbs).map(([suburb, propertyCount]) => ({
+      suburb,
+      propertyCount,
+    })),
+  }));
+
+  // Step 2: Handle suburb selection
+  const handleSuburbSelect = (suburb) => {
+    const filteredProperties = properties.filter(
+      (property) => property.suburb === suburb
+    );
+    setProperties(filteredProperties); // Update state with filtered properties
+    setCurrentPage(1); // Reset to the first page
+  };
 
   return (
     <>
       <Meta
-        title={'Properties'}
-        description={'Find your prefered properties'}
+        title={"Properties"}
+        description={"Find your preferred properties"}
       />
-      <div className='properties-page'>
-        <div className='contact-container-title'>
-          <div className='contact-container-title-overlay'></div>
-          <h2>Available Properties</h2>
-        </div>
-        <div className='properties-page-list'>
-          {currentProperties.map((property) => (
-      <Link key={property.id} to={`/property/${property.id}`} className='property-page-card'>
-      {property.Images && property.Images.length > 0 ? (
-        <div className="property-image-container">
-          <img src={property.Images[0].url} alt={property.name} />
-          <span className="property-category">{property.property_type}</span>
-          <span className="property-posted-date">Posted on: {new Date(property.created_at).toLocaleDateString()}</span>
-        </div>
-      ) : (
-        <div className='no-image-placeholder'>No Image Available</div>
-      )}
-      <div className='property-page-info'>
-      <h3 className='property-page-name'>{property.category}</h3>
-        <span className='property-page-price'>N$ {property.price}</span>
-       
-        <p className='property-page-address'>
-          {property.house_number}, {property.street_name}, {property.suburb}, {property.town}
-        </p>
-        <div className='property-page-details'>
-          <span className='property-page-detail'><FaBed /> {property.bedrooms}</span>
-          <span className='property-page-detail'><FaBath /> {property.bathrooms}</span>
-          <span className='property-page-detail'><BiArea /> {property.land_size} sq. ft</span>
-        </div>
-      </div>
-    </Link>
-    
-          ))}
-        </div>
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
-        />
+      <div className="">
+        <PageHeaderContainer>
+          <PageHeaderOverlay />
+          <HeadingSecondary fontColor="#fff">
+            {propertyType === "sale"
+              ? "Properties for Sale"
+              : "Properties for Rent"}
+          </HeadingSecondary>
+        </PageHeaderContainer>
+        <MainContainer>
+          <PropertiesPage>
+            <PropertiesPageList>
+              <FlexContainer>
+                {currentProperties.map((property) => (
+                  <PropertyCard
+                    flexBasis={44}
+                    key={property.id}
+                    propertyId={property.id}
+                    imageUrl={property.Images?.[0]?.url || ""}
+                    propertyType={property.property_type}
+                    postedDate={new Date(
+                      property.created_at
+                    ).toLocaleDateString()}
+                    category={property.category}
+                    price={property.price}
+                    name={property.name}
+                    address={`${property.town}, ${property.suburb}`}
+                    bedrooms={property.bedrooms}
+                    bathrooms={property.bathrooms}
+                    landSize={property.land_size}
+                  />
+                ))}
+              </FlexContainer>
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+              />
+            </PropertiesPageList>
+
+            {/* Pass the formatted counts and onSuburbSelect to the PropertyFilter */}
+            <PropertyFilter
+              counts={countsArray}
+              selectedPropertyType={propertyType}
+              onSuburbSelect={handleSuburbSelect} // Pass the function
+            />
+          </PropertiesPage>
+        </MainContainer>
       </div>
     </>
   );

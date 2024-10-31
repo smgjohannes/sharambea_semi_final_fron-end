@@ -1,0 +1,48 @@
+.property-filter {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+  }
+  
+  .region-filter {
+    margin-bottom: 10px;
+  }
+  
+  .region-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .region-options {
+    padding-left: 20px;
+    list-style-type: disc;
+  }
+  .region-options:hover {
+    color: goldenrod;
+cursor: pointer;
+  }
+  .region-options li {
+    padding: 5px 0;
+  }
+  
+  @media (max-width: 768px) {
+    .property-filter {
+      width: 100%;
+      padding: 10px;
+    }
+  
+    .region-header {
+      font-size: 1rem;
+    }
+  }
+  

@@ -20,12 +20,22 @@
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
+  cursor: pointer;
 
   height: fit-content !important;
 }
-.search-form input {
-  width: 40% !important;
+.search-form .input-section{
+  width: 100% !important; /* Use 100% to match the container width */
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
+.search-form .input-section:hover {
+cursor: pointer;
+color: #cc9900;
+}
+
 .search-form button {
   background-color: #cc9900;
   color: #fff;
@@ -137,17 +147,66 @@
   flex-direction: column;
   gap: 10px;
 }
-
-@media (max-width: 992px) {
-  .search-form {
-    flex-direction: column;
-    margin: 0 15px !important;
-  }
+/* Dropdown container */
+.dropdown {
+  position: relative;
+  width: 100%;
 }
 
+/* Dropdown options */
+.dropdown-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 1px solid #ccc;
+  background-color: white;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+  border-radius: 5px;
+}
+
+.dropdown-option {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown-option:hover {
+  background-color: #f0f0f0;
+}
 @media (max-width: 768px) {
   .search-form {
     flex-direction: column;
-    margin: 0 15px;
+    padding: 15px;
+  }
+
+  .search-form-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .search-form input, .search-form select, .search-form button {
+    width: 100%; /* Make all elements full width */
+  }
+
+  .dropdown-options {
+    width: 100%; /* Ensure the dropdown takes up the full width of the container */
+  }
+
+  .search-button {
+    width: 100%; /* Make the search button full width */
+    padding: 12px; /* Increase padding for better tap areas */
   }
 }
+
+@media (max-width: 480px) {
+  .search-form {
+    padding: 10px;
+  }
+
+  .search-form input, .search-form select, .search-form button {
+    font-size: 0.9rem;
+  }
+}
+

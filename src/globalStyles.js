@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
 
@@ -15,17 +15,6 @@ export const GlobalStyle = createGlobalStyle`
     color: #000;
     text-shadow: none;
 }
-
-html {
-    box-sizing: border-box;
-    font-size: 62.5%;
-  }
-
-  @media only screen and (max-width: 68.75em) {
-    html {
-      font-size: 50%;
-    }
-  }
 
 
 body {

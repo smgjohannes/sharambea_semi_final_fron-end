@@ -11,30 +11,7 @@ client.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (
-      error.response &&
-      (error.response.status === 429 || error.response.status === 403)
-    ) {
-      console.log('Something went wrong');
-    }
-
-    if (
-      error.response &&
-      error.response.status &&
-      error.response.status !== 412 &&
-      error.response.status !== 422 &&
-      error.response.status > 399 &&
-      error.response.status < 500
-    ) {
-      console.log(error.response.data.message || 'error_title');
-    }
-
-    if (error.response && error.response.status === 500) {
-      console.log('error_title');
-    }
-
     console.error(error);
-
     return Promise.reject(error);
   }
 );
@@ -45,15 +22,13 @@ export class HttpClient {
     this.baseUrl = config.baseUrl || window.location.origin;
   }
 
-  getAxiosHeaders(url) {
+  getAxiosHeaders() {
     const language = localStorage.getItem('X-LOCALE');
     const headers = {};
 
-    // Add authorization only for protected routes
-    const unprotectedRoutes = ['/properties/all']; // List your unprotected routes here
-
-    if (!unprotectedRoutes.includes(url) && this.token.getAccessToken()) {
-      headers.authorization = `Bearer ${this.token.getAccessToken()}`;
+    const accessToken = this.token.getAccessToken();
+    if (accessToken) {
+      headers.authorization = `Bearer ${accessToken}`;
     }
 
     if (language) {
@@ -63,11 +38,33 @@ export class HttpClient {
     return headers;
   }
 
+  async refreshAccessToken() {
+    try {
+      const refreshToken = this.token.getRefreshToken();
+      if (!refreshToken) throw new Error('No refresh token available');
+      
+      const response = await axios.post(`${this.baseUrl}/auth/refresh`, {
+        refresh_token: refreshToken,
+      });
+      
+      const newAccessToken = response.data.access_token;
+      
+      // Update the access token in local storage and Token class
+      this.token.setAccessToken(newAccessToken);
+      return newAccessToken;
+    } catch (error) {
+      console.error("Error refreshing token", error);
+      this.token.reset();  // Log the user out if refresh fails
+      throw error;
+    }
+  }
+
   async executeQuery(method, url, query, body, retryCount = 0) {
     if (retryCount > MAX_RETRY) {
       this.token.reset();
       throw new Error('MAX_RETRY_EXCEEDED');
     }
+
     try {
       const response = await axios({
         baseURL: this.baseUrl,
@@ -78,12 +75,22 @@ export class HttpClient {
         headers: this.getAxiosHeaders(),
       });
       return response;
-    } catch (e) {
-      if (e.response && e.response.status === 401) {
-        return this.executeQuery(method, url, query, body, retryCount + 1);
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        try {
+          const newAccessToken = await this.refreshAccessToken();
+          this.setAxiosHeaderAuthorization(newAccessToken); // Update authorization header
+          return this.executeQuery(method, url, query, body, retryCount + 1);
+        } catch (e) {
+          throw e; // If refresh fails, propagate the error
+        }
       }
-      throw e;
+      throw error;
     }
+  }
+
+  setAxiosHeaderAuthorization(token) {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   }
 
   async get(url, query) {
@@ -98,7 +105,7 @@ export class HttpClient {
     return this.executeQuery('patch', url, {}, body);
   }
 
-  async delete(url, body) {
+  async delete(url) {
     return this.executeQuery('delete', url);
   }
 }

@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const SectionContainer = styled.section`
   position: relative;
-  background: ${(props) => props.backgroundColor || '#fff'};
+  background: ${(props) => props.backgroundColor || "#fff"};
   padding: 8px 0;
   margin: 40px 0;
   transition: transform 0.6s cubic-bezier(0.64, 0, 0.78, 0);
@@ -29,7 +29,7 @@ export const SectionContent = styled.div`
 
 export const OverlayContainer = styled.div`
   position: absolute;
-  content: '';
+  content: "";
   height: 100%;
   left: 0;
   top: 0;

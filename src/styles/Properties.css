@@ -1,21 +1,32 @@
+.properties-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin: 30px 100px;
+}
+
 .properties-page h2 {
   margin-bottom: 20px;
   font-size: 30px;
   text-align: center;
 }
+
 .pagination {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 55px 0 !important;
 }
+
 .properties-page-list {
   display: flex;
   justify-content: center;
-  gap: 25px;
   flex-wrap: wrap;
-  margin: 0 100px;
+  gap: 20px;
+  width: 70%;  
 }
+
 .property-image-container {
   position: relative;
 }
@@ -24,7 +35,6 @@
   width: 100%;
   height: 150px;
   object-fit: cover;
-  position: relative;
 }
 
 .property-category {
@@ -40,7 +50,7 @@
 }
 
 .property-posted-date {
-  position: absolute ;
+  position: absolute;
   bottom: 10px;
   left: 10px;
   background-color: rgba(0, 0, 0, 0.6);
@@ -50,27 +60,27 @@
   font-size: 0.8em;
   font-style: italic;
 }
+
 .property-page-card {
   border: 1px solid #ddd;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
-  width: 300px;
+  width: 48%;  
   text-decoration: none;
-  position: relative ;
+  position: relative;
 }
+
 .property-page-card:hover {
   cursor: pointer;
   background-color: rgba(255, 223, 40, 0.589);
   transition: ease-in-out 0.3s;
 }
+
 .property-page-card img {
   width: 100%;
   height: 150px;
   object-fit: cover;
-}
-.property-page-card img:hover {
-  background-color: rgb(10, 10, 10, 0.6);
 }
 
 .property-page-info {
@@ -96,7 +106,6 @@
   display: block;
   font-size: 0.9em;
   color: #777;
-  text-decoration: none !important;
 }
 
 .property-page-name {
@@ -124,11 +133,17 @@
 }
 
 @media (max-width: 768px) {
-  .properties-page-list {
-    margin: 0 20px;
+  .properties-page {
+    flex-direction: column-reverse;
+    margin: 0 50px;
   }
-  .property-page-card {
-    overflow: hidden;
+
+  .properties-page-list {
     width: 100%;
+    margin: 0;
+  }
+
+  .property-page-card {
+    width: 100%;  
   }
 }

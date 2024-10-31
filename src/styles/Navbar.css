@@ -2,7 +2,7 @@
 .siteNav {
   padding-top: 20px;
   padding-bottom: 20px;
-  position: sticky;
+position: fixed;
   top: 0;
   z-index: 9;
   width: 100%;
@@ -38,21 +38,28 @@
 
 }
 
-.drawer {
+.DrawerMenu {
   position: fixed;
-  top: 84px;
+  top: 98px;
   right: 0;
   height: 100%;
   width: 60%;
   max-width: 300px;
-  background-color: rgba(0, 0, 0, 0.9);
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-  transform: translateX(100%);
-  transition: transform 0.3s ease-in-out;
-  z-index: 10;
-  display: none; /* Hide drawer on larger screens */
+  background-color: rgba(0, 0, 0, 0.9) !important;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5) !important;
+  
+  transition: transform 0.3s ease-in-out !important;
+  z-index: 999;
+  display: none;
 }
+.ant-drawer-close {
+  display: none !important;
+  
+}
+.ant-drawer-header {
+  display: none !important;
 
+}
 .drawer.open {
   transform: translateX(0);
 }
@@ -77,6 +84,7 @@
 
 .drawerMenuLink:hover {
   color: #fff;
+  cursor: pointer;
 }
 
 /* Dropdown Menu for Tools */
@@ -91,7 +99,16 @@
   margin-top: 0; /* Remove the margin to prevent navbar height increase */
   z-index: 11;
 }
-
+.drawerMenu .dropdownMenu {
+  display: block !important;
+  /* Ensure dropdown is visible */
+  position: relative;
+  /* Maintain within the drawer */
+  background-color: #131618;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 .dropdownMenu.open {
   display: block;
 }
@@ -160,7 +177,7 @@
 
   .drawerMenu .dropdownMenu {
     display: none;
-    position: absolute;
+    position: relative;
     top: 100%; /* Position dropdown right below the Tools link */
     left: 0;
     background-color: #131618;

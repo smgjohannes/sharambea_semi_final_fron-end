@@ -5,11 +5,12 @@ import 'slick-carousel/slick/slick-theme.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 
-import './globalStyles';
+import {GlobalStyle} from './globalStyles';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <GlobalStyle/>
     <App />
   </React.StrictMode>
 );

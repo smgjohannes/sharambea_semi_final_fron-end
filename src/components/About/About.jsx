@@ -9,10 +9,12 @@ import {
   AboutTitle,
 } from './AboutStyles';
 import Agents from '../Agents/Agents';
+import { MainContainer } from "../Styles";
 
 export const About = (props) => {
   return (
     <AboutContainer>
+      <MainContainer>
       <AboutSection>
         <AboutOverview>
           <AboutTitle>Overview</AboutTitle>
@@ -40,6 +42,8 @@ export const About = (props) => {
           <Agents />
         </AboutTeam>
       </AboutSection>
+
+      </MainContainer>
     </AboutContainer>
   );
 };
