@@ -38,10 +38,7 @@ const Contact = () => {
     const httpClient = new HttpClient();
     e.preventDefault();
     try {
-      const response = await httpClient.post(
-        "/email/send",
-        JSON.stringify(formData)
-      );
+      const response = await httpClient.post("/email/send", formData);
       setSuccessMessage("Message sent successfully!");
       setFormData({
         ...formData,
@@ -51,7 +48,7 @@ const Contact = () => {
         message: "",
       });
     } catch (error) {
-      setErrorMessage("An error occurred. Please try again.");
+      setErrorMessage("An error occurred. Please try again.", error);
     }
   };
 

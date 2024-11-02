@@ -67,9 +67,11 @@
 
 .property-name {
   margin: 10px 0 5px;
+  text-align: left !important;
+}
+.property-page-name{
   text-align: left;
 }
-
 .property-address {
   font-size: 0.9em;
   color: #555;

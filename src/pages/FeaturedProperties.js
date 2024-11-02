@@ -86,8 +86,7 @@ const FeaturedProperties = ({ searchCriteria }) => {
                     )}
 
                     <p className="property-address">
-                      {property.street_name}, {property.house_number},{" "}
-                      {property.town}
+                      {`${property.town}, ${property.suburb}`}
                     </p>
                     <div className="property-details">
                       <span className="property-detail">

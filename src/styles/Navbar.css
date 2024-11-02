@@ -99,6 +99,9 @@ position: fixed;
   margin-top: 0; /* Remove the margin to prevent navbar height increase */
   z-index: 11;
 }
+.propertiesDropdownMenu{
+  width: 100px !important;
+}
 .drawerMenu .dropdownMenu {
   display: block !important;
   /* Ensure dropdown is visible */

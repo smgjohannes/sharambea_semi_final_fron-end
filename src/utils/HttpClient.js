@@ -1,6 +1,6 @@
-import axios from 'axios';
-import config from '../config';
-import { Token } from './Token';
+import axios from "axios";
+import config from "../config";
+import { Token } from "./Token";
 
 const MAX_RETRY = 3;
 
@@ -23,16 +23,11 @@ export class HttpClient {
   }
 
   getAxiosHeaders() {
-    const language = localStorage.getItem('X-LOCALE');
     const headers = {};
 
     const accessToken = this.token.getAccessToken();
     if (accessToken) {
       headers.authorization = `Bearer ${accessToken}`;
-    }
-
-    if (language) {
-      headers['Accept-Language'] = language;
     }
 
     return headers;
@@ -41,20 +36,19 @@ export class HttpClient {
   async refreshAccessToken() {
     try {
       const refreshToken = this.token.getRefreshToken();
-      if (!refreshToken) throw new Error('No refresh token available');
-      
+      if (!refreshToken) throw new Error("No refresh token available");
+
       const response = await axios.post(`${this.baseUrl}/auth/refresh`, {
         refresh_token: refreshToken,
       });
-      
+
       const newAccessToken = response.data.access_token;
-      
-      // Update the access token in local storage and Token class
+
       this.token.setAccessToken(newAccessToken);
       return newAccessToken;
     } catch (error) {
       console.error("Error refreshing token", error);
-      this.token.reset();  // Log the user out if refresh fails
+      this.token.reset();
       throw error;
     }
   }
@@ -62,7 +56,7 @@ export class HttpClient {
   async executeQuery(method, url, query, body, retryCount = 0) {
     if (retryCount > MAX_RETRY) {
       this.token.reset();
-      throw new Error('MAX_RETRY_EXCEEDED');
+      throw new Error("MAX_RETRY_EXCEEDED");
     }
 
     try {
@@ -79,10 +73,10 @@ export class HttpClient {
       if (error.response && error.response.status === 401) {
         try {
           const newAccessToken = await this.refreshAccessToken();
-          this.setAxiosHeaderAuthorization(newAccessToken); // Update authorization header
+          this.setAxiosHeaderAuthorization(newAccessToken);
           return this.executeQuery(method, url, query, body, retryCount + 1);
         } catch (e) {
-          throw e; // If refresh fails, propagate the error
+          throw e;
         }
       }
       throw error;
@@ -90,22 +84,22 @@ export class HttpClient {
   }
 
   setAxiosHeaderAuthorization(token) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   }
 
   async get(url, query) {
-    return this.executeQuery('get', url, query);
+    return this.executeQuery("get", url, query);
   }
 
   async post(url, body) {
-    return this.executeQuery('post', url, {}, body);
+    return this.executeQuery("post", url, {}, body);
   }
 
   async patch(url, body) {
-    return this.executeQuery('patch', url, {}, body);
+    return this.executeQuery("patch", url, {}, body);
   }
 
   async delete(url) {
-    return this.executeQuery('delete', url);
+    return this.executeQuery("delete", url);
   }
 }
